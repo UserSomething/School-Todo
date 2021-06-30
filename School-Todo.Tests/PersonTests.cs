@@ -1,13 +1,13 @@
 using System;
 using Xunit;
-using School_Todo;
+using School_Todo.Model;
 
 namespace Todo.Tests
 {
     public class PersonTests
     {
         [Fact]
-        public void Given_FirstAndLastNamesAssigned_When_FirstAndLastNamesAreSet_Then_ReturnFirstNameAndLastNameString()
+        public void When_FirstAndLastNamesAreSet_Expect_ReturnFirstNameAndLastNameString()
         {
             string expected = "Bob Jones";
 
@@ -18,7 +18,7 @@ namespace Todo.Tests
         }
 
         [Fact]
-        public void Given_FirstNameIsAssigned_When_FirstNameIsNullOrEmpty_Then_ReturnNoFirstNameString()
+        public void When_FirstNameIsNullOrEmpty_Expect_ReturnNoFirstNameString()
         {
             string expected = "NoFirstName";
 
@@ -29,7 +29,7 @@ namespace Todo.Tests
         }
 
         [Fact]
-        public void Given_LastNameIsAssigned_When_LastNameIsNullOrEmpty_Then_ReturnNoLastNameString()
+        public void When_LastNameIsNullOrEmpty_Expect_ReturnNoLastNameString()
         {
             string expected = "NoLastName";
 
@@ -40,7 +40,7 @@ namespace Todo.Tests
         }
 
         [Fact]
-        public void Given_FirstAndLastNamesAssigned_When_FirstAndLastNamesAreNullOrEmpty_Then_ReturnNoFirstNameAndNoLastNameString()
+        public void When_FirstAndLastNamesAreNullOrEmpty_Expect_ReturnNoFirstNameAndNoLastNameString()
         {
             string expected = "NoFirstName NoLastName";
 

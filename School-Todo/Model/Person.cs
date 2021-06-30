@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace School_Todo
+namespace School_Todo.Model
 {
     public class Person
     {

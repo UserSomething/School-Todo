@@ -2,7 +2,7 @@ using System;
 using Xunit;
 using School_Todo.Model;
 
-namespace Todo.Tests
+namespace School_Todo.Tests
 {
     public class PersonTests
     {

@@ -2,7 +2,7 @@
 using Xunit;
 using School_Todo.Data;
 
-namespace TodoP.Tests
+namespace School_Todo.Tests
 {
     public class PersonSequencerTests
     {

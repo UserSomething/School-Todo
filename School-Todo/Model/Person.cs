@@ -15,9 +15,11 @@ namespace School_Todo.Model
             LastName = lastName;
         }
 
+        public int PersonId { get => personId; }
+
         public string FirstName
         {
-            get { return firstName; }
+            get => firstName;
             set
             {
                 if (string.IsNullOrEmpty(value))
@@ -33,7 +35,7 @@ namespace School_Todo.Model
 
         public string LastName
         {
-            get { return lastName; }
+            get => lastName;
             set
             {
                 if (string.IsNullOrEmpty(value))
@@ -48,4 +50,3 @@ namespace School_Todo.Model
         }
     }
 }
-

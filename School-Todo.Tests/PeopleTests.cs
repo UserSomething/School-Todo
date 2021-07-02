@@ -47,18 +47,18 @@ namespace School_Todo.Tests
 
 
         // Doesn't work right now.
-        //[Fact]
-        //public void When_AddNewPersonCalled_Expect_PersonObject()
-        //{
-        //    // Arrange
-        //    People people = new();
-        //    Person expected = new Person(2, "John", "Smith");
-        //    // Act
-        //    Person actual = people.AddNewPerson("John", "Smith");
-        //    // Assert
-        //    Assert.Equal(expected, actual);
-        //    //Assert.Same(expected, actual);
-        //}
+        [Fact]
+        public void When_AddNewPersonCalled_Expect_PersonObject()
+        {
+            // Arrange
+            People people = new();
+            Person expected = new Person(2, "John", "Smith");
+            // Act
+            Person actual = people.AddNewPerson("John", "Smith");
+            // Assert
+            Assert.Equal(expected, actual);
+            //Assert.Same(expected, actual);
+        }
 
         [Fact]
         public void When_ClearCalled_Expect_PeopleArrayEmpty()

@@ -11,11 +11,15 @@ namespace School_Todo.Model
 
         public Todo(int todoId, string description)
         {
-            TodoId = todoId;
+            this.todoId = todoId;
             Description = description;
         }
 
-        public int TodoId { get; }
-        public string Description { get; set; }
+        public int TodoId { get => todoId; }
+        public string Description 
+        {
+            get => description;
+            set => description = value;
+        }
     }
 }

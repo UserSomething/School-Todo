@@ -6,11 +6,15 @@ namespace School_Todo.Data
     {
         private static int todoId = 0;
 
-        public static int TodoId { get { return todoId; } }
+        public static int TodoId
+        {
+            get => todoId;
+            set => todoId = value;
+        }
 
         public static int NextTodoId()
         {
-            return ++todoId;
+            return ++TodoId;
         }
 
         public static void Reset()

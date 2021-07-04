@@ -50,7 +50,7 @@ namespace School_Todo.Data
             people = Array.Empty<Person>();
         }
 
-        public Person[] RemoveById(int personId)
+        public void RemoveById(int personId)
         {
             List<Person> peopleList = new List<Person>(people);
 
@@ -68,8 +68,6 @@ namespace School_Todo.Data
             peopleList.RemoveAt(removePersonIndex);
 
             people = peopleList.ToArray();
-
-            return people;
         }
     }
 }

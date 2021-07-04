@@ -157,11 +157,13 @@ namespace School_Todo.Tests
             todoItems.AddNewTodo("A text.");
             todoItems.AddNewTodo("A text 2.");
 
-            Todo[] expected = { new Todo(9, "A text 2.") };
+            Todo[] todoArray = { new Todo(9, "A text 2."), new Todo(10, "A text 3.") };
+            Todo expected = new Todo(9, "A text 2.");
             // Act
             todoItems.RemoveById(5);
             // Assert
             //Assert.Equal(expected, actual);
+            Assert.Contains(expected, todoArray);
         }
     }
 }

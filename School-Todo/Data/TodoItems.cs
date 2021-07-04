@@ -132,8 +132,6 @@ namespace School_Todo.Data
             todoItemsList.RemoveAt(removeTodoIndex);
 
             todoItems = todoItemsList.ToArray();
-
-            //return todoItems;
         }
     }
 }

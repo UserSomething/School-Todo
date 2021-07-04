@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using School_Todo.Model;
 
 namespace School_Todo.Data
@@ -19,7 +20,18 @@ namespace School_Todo.Data
 
         public Person FindById(int personId)
         {
-            return people[personId - 1];
+            Person foundPerson = null;
+
+            for (int i = 0; i < people.Length; i++)
+            {
+                if (people[i].PersonId == personId)
+                {
+                    foundPerson = people[i];
+                    break;
+                }
+            }
+
+            return foundPerson;
         }
 
         public Person AddNewPerson(string firstName, string lastName)
@@ -36,6 +48,28 @@ namespace School_Todo.Data
         public void Clear()
         {
             people = Array.Empty<Person>();
+        }
+
+        public Person[] RemoveById(int personId)
+        {
+            List<Person> peopleList = new List<Person>(people);
+
+            int removePersonIndex = 0;
+
+            for (int i = 0; i < peopleList.Count; i++)
+            {
+                if (peopleList[i].PersonId == personId)
+                {
+                    removePersonIndex = i;
+                    break;
+                }
+            }
+
+            peopleList.RemoveAt(removePersonIndex);
+
+            people = peopleList.ToArray();
+
+            return people;
         }
     }
 }

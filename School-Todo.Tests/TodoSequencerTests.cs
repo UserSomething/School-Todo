@@ -7,9 +7,9 @@ namespace School_Todo.Tests
     public class TodoSequencerTests
     {
         [Fact]
-        public void When_NextTodoIdMethodCalled_Expect_TodoIdEqualsOne()
+        public void When_NextTodoIdMethodCalled_Expect_TodoIdEqualsTwo()
         {
-            int expected = 1;
+            int expected = 2;
             int actual = TodoSequencer.NextTodoId();
             Assert.Equal(expected, actual);
         }

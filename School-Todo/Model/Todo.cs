@@ -15,11 +15,24 @@ namespace School_Todo.Model
             Description = description;
         }
 
-        public int TodoId { get => todoId; }
-        public string Description 
+        public int TodoId
+        {
+            get => todoId;
+        }
+        public string Description
         {
             get => description;
             set => description = value;
+        }
+        public bool Done
+        {
+            get => done;
+            set => done = value;
+        }
+        public Person Assignee
+        {
+            get => assingee;
+            set => assingee = value;
         }
     }
 }

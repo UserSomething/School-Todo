@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using School_Todo.Model;
 
 namespace School_Todo.Data
@@ -19,7 +20,82 @@ namespace School_Todo.Data
 
         public Todo FindById(int todoId)
         {
-            return todoItems[todoId - 1];
+            Todo foundTodo = null;
+
+            for (int i = 0; i < todoItems.Length; i++)
+            {
+                if (todoItems[i].TodoId == todoId)
+                {
+                    foundTodo = todoItems[i];
+                    break;
+                }
+            }
+
+            return foundTodo;
+        }
+
+        public Todo[] FindByDoneStatus(bool doneStatus)
+        {
+            Todo[] resultArray = Array.Empty<Todo>();
+
+            for (int i = 0; i < todoItems.Length; i++)
+            {
+                if (todoItems[i].Done == doneStatus)
+                {
+                    Array.Resize(ref resultArray, resultArray.Length + 1);
+                    resultArray[i] = todoItems[i];
+                }
+            }
+
+            return resultArray;
+        }
+
+        public Todo[] FindByAssingnee(int personId)
+        {
+            Todo[] resultArray = Array.Empty<Todo>();
+
+            for (int i = 0; i < todoItems.Length; i++)
+            {
+                if (todoItems[i].TodoId == personId)
+                {
+                    Array.Resize(ref resultArray, resultArray.Length + 1);
+                    resultArray[i] = todoItems[i];
+                }
+            }
+
+            return resultArray;
+        }
+
+        public Todo[] FindByAssingnee(Person assignee)
+        {
+            Todo[] resultArray = Array.Empty<Todo>();
+
+            for (int i = 0; i < todoItems.Length; i++)
+            {
+                if (todoItems[i].Assignee == assignee)
+                {
+                    Array.Resize(ref resultArray, resultArray.Length + 1);
+                    resultArray[i] = todoItems[i];
+                }
+            }
+
+            return resultArray;
+        }
+
+        public Todo[] FindUnassignedTodoItems()
+        {
+            Todo[] resultArray = Array.Empty<Todo>();
+
+            for (int i = 0; i < todoItems.Length; i++)
+            {
+                if (todoItems[i].Assignee == null)
+                {
+                    Array.Resize(ref resultArray, resultArray.Length + 1);
+                    resultArray[i] = todoItems[i];
+                }
+            }
+
+            return resultArray;
         }
 
         public Todo AddNewTodo(string description)
@@ -36,6 +112,28 @@ namespace School_Todo.Data
         public void Clear()
         {
             todoItems = Array.Empty<Todo>();
+        }
+
+        public void RemoveById(int todoId)
+        {
+            List<Todo> todoItemsList = new List<Todo>(todoItems);
+
+            int removeTodoIndex = 0;
+
+            for (int i = 0; i < todoItemsList.Count; i++)
+            {
+                if (todoItemsList[i].TodoId == todoId)
+                {
+                    removeTodoIndex = i;
+                    break;
+                }
+            }
+
+            todoItemsList.RemoveAt(removeTodoIndex);
+
+            todoItems = todoItemsList.ToArray();
+
+            //return todoItems;
         }
     }
 }

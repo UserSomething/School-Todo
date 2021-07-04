@@ -32,32 +32,30 @@ namespace School_Todo.Tests
         }
 
         [Fact]
-        public void When_FindByIdCalled_Expect_PersonObjectAtIndex0()
+        public void When_FindByIdCalled_Expect_PersonObject()
         {
             // Arrange
             People people = new();
 
-            //Person[] expected1 = { new Person(1, "John", "Smtih") }; FAILS
             Person expected = people.AddNewPerson("John", "Smith");
             // Act
-            Person actual = people.FindById(1);
+            Person actual = people.FindById(6);
             // Assert
             Assert.Equal(expected, actual);
         }
 
-
-        // Doesn't work right now.
         [Fact]
         public void When_AddNewPersonCalled_Expect_PersonObject()
         {
             // Arrange
             People people = new();
             Person expected = new Person(2, "John", "Smith");
+            string expectedString = $"{expected.PersonId} {expected.FirstName} {expected.LastName}";
             // Act
             Person actual = people.AddNewPerson("John", "Smith");
+            string actualString = $"{actual.PersonId} {actual.FirstName} {actual.LastName}";
             // Assert
-            Assert.Equal(expected, actual);
-            //Assert.Same(expected, actual);
+            Assert.Equal(expectedString, actualString);
         }
 
         [Fact]
@@ -65,12 +63,27 @@ namespace School_Todo.Tests
         {
             // Arrange
             People people = new ();
-            people.AddNewPerson("Bob", "Norton");
+            people.AddNewPerson("John", "Smith");
             Person[] expected = Array.Empty<Person>();
             // Act
             people.Clear();
             // Assert
             Assert.Empty(expected);
+        }
+
+        [Fact]
+        public void When_RemoveAtIdCalled_Expect_PersonElementRemoved()
+        {
+            // Arrange
+            People people = new ();
+            people.AddNewPerson("John", "Smith");
+            people.AddNewPerson("Troy", "Troyson");
+
+            Person[] expected = { new Person(2, "Troy", "Troyson") };
+            // Act
+            Person[] actual = people.RemoveById(5);
+            // Assert
+            Assert.Equal(expected, actual);
         }
     }
 }

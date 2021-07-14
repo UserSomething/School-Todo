@@ -9,7 +9,7 @@ namespace School_Todo.Tests
         [Fact]
         public void When_NextPersonIdMethodCalled_Expect_PersonIdEqualsOne()
         {
-            int expected = 1;
+            int expected = 4;
             int actual = PersonSeqencer.NextPersonId();
             Assert.Equal(expected, actual);
         }

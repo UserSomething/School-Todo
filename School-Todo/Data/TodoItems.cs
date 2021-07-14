@@ -8,6 +8,16 @@ namespace School_Todo.Data
     {
         private static Todo[] todoItems = Array.Empty<Todo>();
 
+        private int nextArrayIndex = 0;
+        private int nextArrayIndex2 = 0;
+        private int nextArrayIndex3 = 0;
+        private int nextArrayIndex4 = 0;
+
+        private Todo[] resultArrayPersonId = Array.Empty<Todo>();
+        private Todo[] resultArrayPersonObject = Array.Empty<Todo>();
+        private Todo[] resultArrayBool = Array.Empty<Todo>();
+        private Todo[] resultArrayUniassigned = Array.Empty<Todo>();
+
         public int Size()
         {
             return todoItems.Length;
@@ -36,66 +46,80 @@ namespace School_Todo.Data
 
         public Todo[] FindByDoneStatus(bool doneStatus)
         {
-            Todo[] resultArray = Array.Empty<Todo>();
-
             for (int i = 0; i < todoItems.Length; i++)
             {
-                if (todoItems[i].Done == doneStatus)
+                if (todoItems[i].Done.Equals(doneStatus))
                 {
-                    Array.Resize(ref resultArray, resultArray.Length + 1);
-                    resultArray[i] = todoItems[i];
+                    Array.Resize(ref resultArrayBool, resultArrayBool.Length + 1);
+                    resultArrayBool[nextArrayIndex3] = todoItems[i];
+                    nextArrayIndex3++;
                 }
             }
 
-            return resultArray;
+            return resultArrayBool;
         }
-
+        
         public Todo[] FindByAssingnee(int personId)
         {
-            Todo[] resultArray = Array.Empty<Todo>();
+            People people = new();
 
-            for (int i = 0; i < todoItems.Length; i++)
+            for (int i = 0; i < people.Size(); i++)
             {
-                if (todoItems[i].TodoId == personId)
+                if (people.FindAll()[i].PersonId == personId)
                 {
-                    Array.Resize(ref resultArray, resultArray.Length + 1);
-                    resultArray[i] = todoItems[i];
+                    Array.Resize(ref resultArrayPersonId, resultArrayPersonId.Length + 1);
+
+                    resultArrayPersonId[nextArrayIndex] = todoItems[i];
+                    nextArrayIndex++;
                 }
             }
 
-            return resultArray;
+            return resultArrayPersonId;
         }
 
         public Todo[] FindByAssingnee(Person assignee)
         {
-            Todo[] resultArray = Array.Empty<Todo>();
+            People people = new();
 
-            for (int i = 0; i < todoItems.Length; i++)
+            for (int i = 0; i < people.Size(); i++)
             {
-                if (todoItems[i].Assignee == assignee)
+                if (assignee.Equals(people.FindAll()[i]))
                 {
-                    Array.Resize(ref resultArray, resultArray.Length + 1);
-                    resultArray[i] = todoItems[i];
+                    Array.Resize(ref resultArrayPersonObject, resultArrayPersonObject.Length + 1);
+
+                    this.resultArrayPersonObject[nextArrayIndex2] = todoItems[i];
+                    nextArrayIndex2++;
                 }
             }
 
-            return resultArray;
+            return resultArrayPersonObject;
         }
 
         public Todo[] FindUnassignedTodoItems()
         {
-            Todo[] resultArray = Array.Empty<Todo>();
-
             for (int i = 0; i < todoItems.Length; i++)
             {
                 if (todoItems[i].Assignee == null)
                 {
-                    Array.Resize(ref resultArray, resultArray.Length + 1);
-                    resultArray[i] = todoItems[i];
+                    Array.Resize(ref resultArrayUniassigned, resultArrayUniassigned.Length + 1);
+                    resultArrayUniassigned[i] = todoItems[i];
                 }
             }
 
-            return resultArray;
+            return resultArrayUniassigned;
+
+
+            //for (int i = 0; i < todoItems.Length; i++)
+            //{
+            //    if (todoItems[i].Done.Equals(doneStatus))
+            //    {
+            //        Array.Resize(ref resultArrayBool, resultArrayBool.Length + 1);
+            //        resultArrayBool[nextArrayIndex3] = todoItems[i];
+            //        nextArrayIndex3++;
+            //    }
+            //}
+
+            //return resultArrayBool;
         }
 
         public Todo AddNewTodo(string description)

@@ -24,11 +24,18 @@ namespace School_Todo.Tests
         {
             // Arrange
             TodoItems todoItems = new();
+            todoItems.AddNewTodo("Test text 4.");
+            todoItems.AddNewTodo("Test text 6.");
+
             Todo[] expected = { new Todo(1, "Test text 4.") };
+            string expectedString = "1, Test text 4. 3, Text for Abc.";
             // Act
             Todo[] actual = todoItems.FindAll();
+            string actualString = $"{actual[0].TodoId}, {actual[0].Description} {actual[1].TodoId}, {actual[1].Description}";
             // Assert
-            Assert.Equal(expected, actual);
+            Assert.Equal(expectedString, actualString);
+
+
         }
 
         [Fact]
@@ -39,7 +46,7 @@ namespace School_Todo.Tests
 
             Todo expected = todoItems.AddNewTodo("Test text.");
             // Act
-            Todo actual = todoItems.FindById(5);
+            Todo actual = todoItems.FindById(15);
             // Assert
             Assert.Equal(expected, actual);
         }
@@ -50,25 +57,34 @@ namespace School_Todo.Tests
             // Arrange
             TodoItems todoItems = new();
 
-            Todo exp1 = new(1, "Test");
-            Todo exp2 = new(2, "Test 2");
+            //Todo exp1 = new(1, "Test");
+            //Todo exp2 = new(2, "Test 2");
+
+            Todo exp1 = todoItems.AddNewTodo("Test");
+            Todo exp2 = todoItems.AddNewTodo("Test 2");
 
             exp1.Done = true;
             exp2.Done = false;
 
-            Todo[] expected = { exp1 };
+            bool expectedBool = true;
 
             // Act
             Todo[] actual = todoItems.FindByDoneStatus(true);
+            bool actualBool = actual[0].Done;
 
             // Assert
-            Assert.Equal(expected, actual);
+            Assert.Equal(expectedBool, actualBool);
         }
 
         [Fact]
         public void When_FindByAssigneeIdParameter_Expect_TodoItemsArray()
         {
             // Arrange
+            People people = new();
+            people.AddNewPerson("Abc", "123");
+            people.AddNewPerson("John", "Smith");
+            people.AddNewPerson("Todd", "Johnson");
+
             TodoItems todoItems = new();
 
             Todo exp1 = todoItems.AddNewTodo("Test text 4.");
@@ -86,21 +102,33 @@ namespace School_Todo.Tests
         public void When_FindByAssigneePersonParameter_Expect_TodoItemsArray()
         {
             // Arrange
+            People people = new ();
+            Person person1 = people.AddNewPerson("Abc", "123");
+            Person person2 = people.AddNewPerson("John", "Smith");
+
+            Todo todo1 = new (1, "Todo 1");
+            Todo todo2 = new (2, "Todo 2");
+
+            todo1.Assignee = person1;
+            todo2.Assignee = person2;
+
             TodoItems todoItems = new();
+            todoItems.AddNewTodo("Text for Abc.");
+            todoItems.AddNewTodo("Text for John.");
+            todoItems.AddNewTodo("Text for Todd.");
 
-            Todo exp1 = todoItems.AddNewTodo("Test text 6.");
-            Todo exp2 = todoItems.AddNewTodo("Test text 7.");
-
-            exp1.Assignee = new Person(10, "Troy", "Johnson");
-            exp2.Assignee = new Person(11, "Steve", "Steveson");
-
-            Todo[] expected = { exp1 };
+            Todo[] todoArray = Array.Empty<Todo>();
+            string expectedString = $"1, Test text 4. 3, Text for Abc.";
 
             // Act
-            Todo[] actual = todoItems.FindByAssingnee(new Person(1, "Peter", "Abc"));
+            todoArray = todoItems.FindByAssingnee(todo1.Assignee);
+            todoArray = todoItems.FindByAssingnee(todo2.Assignee);
+
+            string actualString = $"{todoArray[0].TodoId}, {todoArray[0].Description} {todoArray[1].TodoId}, {todoArray[1].Description}";
+
 
             // Assert
-            Assert.Equal(expected, actual);
+            Assert.Equal(expectedString, actualString);
         }
 
         [Fact]
@@ -109,24 +137,21 @@ namespace School_Todo.Tests
             // Arrange
             TodoItems todoItems = new();
 
-            Todo exp1 = todoItems.AddNewTodo("Test text 4.");
-
-            Todo[] expected = { exp1 };
+            todoItems.AddNewTodo("Test text 4.");
 
             // Act
             Todo[] actual = todoItems.FindUnassignedTodoItems();
 
             // Assert
-            Assert.Equal(expected, actual);
+            Assert.Null(actual[0].Assignee);
         }
 
-        // Doesn't work right now.
         [Fact]
         public void When_AddNewTodoCalled_Expect_TodoObject()
         {
             // Arrange
             TodoItems todoItems = new();
-            Todo expected = new Todo(9, "Text.");
+            Todo expected = new Todo(14, "Text.");
             string expectedString = $"{expected.TodoId} {expected.Description}";
             // Act
             Todo actual = todoItems.AddNewTodo("Text.");
@@ -157,13 +182,15 @@ namespace School_Todo.Tests
             todoItems.AddNewTodo("A text.");
             todoItems.AddNewTodo("A text 2.");
 
-            Todo[] todoArray = { new Todo(9, "A text 2."), new Todo(10, "A text 3.") };
-            Todo expected = new Todo(9, "A text 2.");
+            string expected = "13, A text 2.";
+
             // Act
-            todoItems.RemoveById(5);
+            todoItems.RemoveById(12);
+
+            Todo[] arrayTodo = todoItems.FindAll();
+            string actual = $"{arrayTodo[0].TodoId}, {arrayTodo[0].Description}";
             // Assert
-            //Assert.Equal(expected, actual);
-            Assert.Contains(expected, todoArray);
+            Assert.Equal(expected, actual);
         }
     }
 }

@@ -140,22 +140,15 @@ namespace School_Todo.Data
 
         public void RemoveById(int todoId)
         {
-            List<Todo> todoItemsList = new List<Todo>(todoItems);
-
-            int removeTodoIndex = 0;
-
-            for (int i = 0; i < todoItemsList.Count; i++)
+            for (int i = todoId - 1; i < todoItems.Length - 1; i++)
             {
-                if (todoItemsList[i].TodoId == todoId)
-                {
-                    removeTodoIndex = i;
-                    break;
-                }
+                todoItems[i] = todoItems[i + 1];
             }
 
-            todoItemsList.RemoveAt(removeTodoIndex);
+            Todo[] tempArray = new Todo[todoItems.Length - 1];
+            Array.Copy(todoItems, tempArray, tempArray.Length);
 
-            todoItems = todoItemsList.ToArray();
+            todoItems = tempArray;
         }
     }
 }

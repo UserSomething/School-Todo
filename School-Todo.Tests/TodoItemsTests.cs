@@ -182,10 +182,10 @@ namespace School_Todo.Tests
             todoItems.AddNewTodo("A text.");
             todoItems.AddNewTodo("A text 2.");
 
-            string expected = "13, A text 2.";
+            string expected = "12, A text.";
 
             // Act
-            todoItems.RemoveById(12);
+            todoItems.RemoveById(11);
 
             Todo[] arrayTodo = todoItems.FindAll();
             string actual = $"{arrayTodo[0].TodoId}, {arrayTodo[0].Description}";

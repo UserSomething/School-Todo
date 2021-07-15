@@ -52,22 +52,15 @@ namespace School_Todo.Data
 
         public void RemoveById(int personId)
         {
-            List<Person> peopleList = new List<Person>(people);
-
-            int removePersonIndex = 0;
-
-            for (int i = 0; i < peopleList.Count; i++)
+            for (int i = personId - 1; i < people.Length - 1; i++)
             {
-                if (peopleList[i].PersonId == personId)
-                {
-                    removePersonIndex = i;
-                    break;
-                }
+                people[i] = people[i + 1];
             }
 
-            peopleList.RemoveAt(removePersonIndex);
+            Person[] tempArray = new Person[people.Length - 1];
+            Array.Copy(people, tempArray, tempArray.Length);
 
-            people = peopleList.ToArray();
+            people = tempArray;
         }
     }
 }
